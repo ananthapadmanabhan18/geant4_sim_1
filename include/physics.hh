@@ -14,11 +14,20 @@
 #include "G4SystemOfUnits.hh"
 #include "G4OpticalPhysics.hh"
 
+#include "G4ParticleDefinition.hh"
+#include "G4DecayTable.hh"
+#include "G4PhaseSpaceDecayChannel.hh"
+#include "G4ProcessManager.hh"
+
 
 class PhysicsList : public G4VModularPhysicsList{
     public:
         PhysicsList();
         ~PhysicsList();
+
+    // Overriding these methods is required to inject custom particles/processes
+    virtual void ConstructParticle() override;
+    virtual void ConstructProcess() override;
 };
 
 

@@ -25,7 +25,7 @@ void RunAction::BeginOfRunAction(const G4Run* run){
 
 
     G4AnalysisManager* man = G4AnalysisManager::Instance();
-    man->OpenFile("D:\\Coding\\Codes\\GIthub_Repos\\Geant4_Trials\\Outputs\\output" + strRunID.str() + ".root");
+    man->OpenFile(strRunID.str() + ".root");
 
 }
 

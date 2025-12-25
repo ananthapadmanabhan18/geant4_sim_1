@@ -5,11 +5,15 @@
 PrimaryGenerator::PrimaryGenerator(){
     fParticleGun = new G4ParticleGun(1);
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition* particle = particleTable->FindParticle("proton");
+    G4ParticleDefinition* particle = particleTable->FindParticle("parentParticle");
+
+
     fParticleGun->SetParticleDefinition(particle);
 
-    fParticleGun->SetParticleEnergy(1.*GeV);
-    fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.*m));
+
+    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+
+    fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
 }
 
 PrimaryGenerator::~PrimaryGenerator(){
@@ -18,13 +22,15 @@ PrimaryGenerator::~PrimaryGenerator(){
 
 void PrimaryGenerator::GeneratePrimaries(G4Event* anEvent){
 
-    G4double random = G4UniformRand();
-    random = random*2*M_PI;
-    G4double x = 5.*m*cos(random);
-    G4double y = 5.*m*sin(random);
-    G4double z = 5.*m;
-    
-    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
+    G4double v = G4RandGauss::shoot(20000, 500)* m/s;
+
+    G4double mass = fParticleGun->GetParticleDefinition()->GetPDGMass();
+
+    G4double kineticEnergy = 0.5 * mass * (v*v)/CLHEP::c_squared;
+
+    std::cout << "Kinetic Energy: " << kineticEnergy/CLHEP::MeV << " MeV" << std::endl;
+
+    fParticleGun->SetParticleEnergy(kineticEnergy);
 
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }
