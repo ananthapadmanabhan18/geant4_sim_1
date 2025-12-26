@@ -2,7 +2,7 @@
 /run/verbose 0
 /event/verbose 0
 /tracking/verbose 0
-/run/numberOfThreads 4
+/run/numberOfThreads 1
 /run/initialize
 #/run/beamOn 200000
 /control/execute vis.mac

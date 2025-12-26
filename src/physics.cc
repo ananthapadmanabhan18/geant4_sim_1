@@ -14,14 +14,11 @@ PhysicsList::~PhysicsList(){
 
 
 void PhysicsList::ConstructParticle() {
-    // Construct standard particles (electrons, gammas, etc.) 
+
     // from the registered physics modules
     G4VModularPhysicsList::ConstructParticle();
 
-    // --- Define Your Custom Particle ---
     G4double mass = 1 * MeV;
-    G4double halfLife = 20.0 * ns;
-    G4double meanLife = halfLife / std::log(2); // ~28.85 ns
 
     G4ParticleDefinition* myParticle = new G4ParticleDefinition(
         "parentParticle", // Name
@@ -39,12 +36,10 @@ void PhysicsList::ConstructParticle() {
         0,                  // Baryon number
         999,                // PDG encoding (pick an unused number)
         false,              // Stable
-        meanLife,           // Lifetime
+        2.5*ms,           // Mean Lifetime
         NULL,               // Decay table (set below)
         false               // Short lived
     );
-
-
 
     G4ParticleDefinition* daughterParticle = new G4ParticleDefinition(
             "daughterParticle", // Name

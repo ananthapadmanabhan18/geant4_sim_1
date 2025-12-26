@@ -12,6 +12,7 @@
 #include "G4MaterialPropertiesTable.hh"
 #include "G4OpticalSurface.hh"
 #include "detector.hh"
+#include "TH2F.h"
 
 
 class DetectorConstruction : public G4VUserDetectorConstruction{
@@ -33,6 +34,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction{
         G4double photonEnergy[2] = {2.034*eV, 4.136*eV};    
         G4double RI_Water[2] = {1.33, 1.33};
         G4double RI_air[2] = {1.0, 1.0};
+        G4double absorptionAir[2] = {1*m, 1*m};
 
 
 };

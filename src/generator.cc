@@ -22,7 +22,7 @@ PrimaryGenerator::~PrimaryGenerator(){
 
 void PrimaryGenerator::GeneratePrimaries(G4Event* anEvent){
 
-    G4double v = G4RandGauss::shoot(20000, 500)* m/s;
+    G4double v = G4RandGauss::shoot(2000, 500)* m/s;
 
     G4double mass = fParticleGun->GetParticleDefinition()->GetPDGMass();
 
